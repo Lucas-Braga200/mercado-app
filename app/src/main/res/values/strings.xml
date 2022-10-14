@@ -7,4 +7,7 @@
     <string name="clientes">Clientes</string>
     <string name="fornecedores">Fornecedores</string>
     <string name="sair">Sair</string>
+    <string name="listagem">Listagem</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="voltar">Voltar</string>
 </resources>

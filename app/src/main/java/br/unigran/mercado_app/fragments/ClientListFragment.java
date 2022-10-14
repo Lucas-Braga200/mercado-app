@@ -7,8 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.unigran.mercado_app.R;
+import br.unigran.mercado_app.database.ClientDB;
+import br.unigran.mercado_app.database.DBHelper;
+import br.unigran.mercado_app.models.Client;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,10 @@ import br.unigran.mercado_app.R;
  * create an instance of this fragment.
  */
 public class ClientListFragment extends Fragment {
+    ListView clientList;
+    List<Client> data;
+    DBHelper db;
+    ClientDB clientDB;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +73,23 @@ public class ClientListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_client_list, container, false);
+
+        clientList = (ListView) view.findViewById(R.id.clientListView);
+        data = new ArrayList<>();
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
+                getActivity(),
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                data
+        );
+        clientList.setAdapter(arrayAdapter);
+
+        db = new DBHelper(getActivity());
+        clientDB = new ClientDB(db);
+
+        clientDB.list(data);
+
+        return view;
     }
 }
