@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
+import br.unigran.mercado_app.fragments.ClientEditorFragment;
 import br.unigran.mercado_app.fragments.ClientListFragment;
 
 public class ClientActivity extends AppCompatActivity {
@@ -25,6 +26,13 @@ public class ClientActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.clientFragment, new ClientListFragment())
+                .commit();
+    }
+
+    public void editorScreen(View view) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.clientFragment, new ClientEditorFragment())
                 .commit();
     }
 }

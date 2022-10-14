@@ -10,4 +10,6 @@
     <string name="listagem">Listagem</string>
     <string name="cadastro">Cadastro</string>
     <string name="voltar">Voltar</string>
+    <string name="nome">Nome</string>
+    <string name="confirmar">Confirmar</string>
 </resources>
