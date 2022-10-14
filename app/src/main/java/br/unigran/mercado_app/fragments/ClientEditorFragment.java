@@ -1,5 +1,6 @@
 package br.unigran.mercado_app.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import br.unigran.mercado_app.R;
+import br.unigran.mercado_app.database.ClientDB;
+import br.unigran.mercado_app.database.DBHelper;
+import br.unigran.mercado_app.models.Client;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,12 @@ import br.unigran.mercado_app.R;
  * create an instance of this fragment.
  */
 public class ClientEditorFragment extends Fragment {
+    TextView nameTextView;
+
+    Button submitButton;
+
+    DBHelper db;
+    ClientDB clientDB;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,10 +71,46 @@ public class ClientEditorFragment extends Fragment {
         }
     }
 
+    public void submitClient() {
+        Client client = new Client();
+
+        client.setName(nameTextView.getText().toString());
+
+        clientDB.insert(client);
+
+        // Toaster message
+        Toast.makeText(getActivity(), "Cliente criado com sucesso!!!", Toast.LENGTH_SHORT)
+                .show();
+
+        // Redirect to list fragment
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.clientFragment, new ClientListFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client_editor, container, false);
+        View view = inflater.inflate(R.layout.fragment_client_editor, container, false);
+
+        db = new DBHelper(getActivity());
+        clientDB = new ClientDB(db);
+
+        nameTextView = view.findViewById(R.id.nameEditText);
+
+        submitButton = view.findViewById(R.id.submitButton);
+
+        // Set On click events
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitClient();
+            }
+        });
+
+        return view;
     }
 }
