@@ -15,4 +15,6 @@
     <string name="data_de_nascimento">Data de nascimento</string>
     <string name="endere_o">Endereço</string>
     <string name="telefone">Telefone</string>
+    <string name="descri_o">Descrição</string>
+    <string name="pre_o">Preço</string>
 </resources>

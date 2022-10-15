@@ -35,4 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SupplierActivity.class);
         resultLauncher.launch(intent);
     }
+
+    public void productActivity(View view) {
+        Intent intent = new Intent(this, ProductActivity.class);
+        resultLauncher.launch(intent);
+    }
 }
