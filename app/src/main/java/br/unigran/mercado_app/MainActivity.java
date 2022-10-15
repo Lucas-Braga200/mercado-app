@@ -26,8 +26,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void next(View view) {
+    public void clientActivity(View view) {
         Intent intent = new Intent(this, ClientActivity.class);
+        resultLauncher.launch(intent);
+    }
+
+    public void supplierActivity(View view) {
+        Intent intent = new Intent(this, SupplierActivity.class);
         resultLauncher.launch(intent);
     }
 }
